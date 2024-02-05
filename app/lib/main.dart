@@ -1,18 +1,27 @@
-import 'package:app/screens/auth/login.screen.dart';
 import 'package:app/screens/auth/register.screen.dart';
+import 'package:app/screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     return MaterialApp(
-      title: "myapp",
-      home: LoginScreen(),
+      title: "Algeria Travel",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
+      home: WelcomeScreen(),
       initialRoute: "/",
       routes: {
         "/home": (ctx) => HomeScreen(),
