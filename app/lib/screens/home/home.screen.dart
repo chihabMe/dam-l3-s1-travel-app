@@ -1,11 +1,20 @@
 import 'package:app/widgets/BottomNavigator.dart';
+import 'package:app/widgets/regionsList/regions.list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("home")),
-        bottomNavigationBar: BottomNavigator());
+      body: Column(
+        children: [
+          SizedBox(
+            height: 40,
+          ),
+          RegionsList()
+        ],
+      ),
+      bottomNavigationBar: BottomNavigator(),
+    );
   }
 }

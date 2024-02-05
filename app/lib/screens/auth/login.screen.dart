@@ -1,5 +1,5 @@
 import 'package:app/widgets/ui/button.widget.dart';
-import 'package:app/widgets/ui/inpu.widget.dart';
+import 'package:app/widgets/ui/input.widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

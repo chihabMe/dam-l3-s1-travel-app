@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/screens/home/home.screen.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "app",
+            "program": "lib/screens/home/home.screen.dart"
+        }
+    ]
+}
