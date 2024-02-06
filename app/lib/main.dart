@@ -1,4 +1,4 @@
-import 'package:app/screens/welcome.screen.dart';
+import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
