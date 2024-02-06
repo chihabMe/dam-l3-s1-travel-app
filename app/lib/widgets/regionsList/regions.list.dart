@@ -9,7 +9,7 @@ class RegionsList extends StatefulWidget {
 }
 
 class RegionsListState extends State<RegionsList> {
-  List<String> regions = ["all", "constantine", "oran", "biskra"];
+  List<String> regions = ["all", "coast", "west", "east", "desert"];
   int currentIdx = 0;
   void handlePress(idx) {
     setState(() {
