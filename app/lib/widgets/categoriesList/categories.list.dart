@@ -1,41 +1,51 @@
-import 'dart:ffi';
-
-import 'package:app/interfaces/i.filter.dart';
-import 'package:app/widgets/filter.item.dart';
+import 'package:app/interfaces/i.place.dart';
+import 'package:app/widgets/placesList/places.item.dart';
 import 'package:flutter/material.dart';
 
-class CategoriesList extends StatefulWidget {
+class CategoiresList extends StatefulWidget {
+  const CategoiresList({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => RegionsListState();
+  CategoiresListState createState() => CategoiresListState();
 }
 
-class RegionsListState extends State<CategoriesList> {
-  List<IFilter> regions = [
-    IFilter(name: "cafe", iconPath: "assets/icons/cafe.png"),
-    IFilter(name: "restaurants", iconPath: "assets/icons/desert.png"),
-    IFilter(name: "museums", iconPath: "assets/icons/museum.png"),
-    IFilter(name: "historical sites", iconPath: "assets/icons/coliseum.png"),
+class CategoiresListState extends State<CategoiresList> {
+  List<IPlace> places = [
+    IPlace(
+      name: "Constantine",
+      image: "assets/constantine-algeria.jpg",
+      rating: 4.5,
+      state: "Constantine",
+    ),
+    IPlace(
+      name: "Algiers",
+      image: "assets/Algiers-Cathedral.jpg",
+      rating: 4.2,
+      state: "Algiers",
+    ),
+    IPlace(
+      name: "Biskra",
+      image: "assets/Oran-Palms.jpg",
+      rating: 4,
+      state: "Biskra",
+    ),
   ];
-  int currentIdx = 0;
-  void handlePress(idx) {
-    setState(() {
-      currentIdx = idx;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 350,
       child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: regions.length,
-          itemBuilder: (context, index) => FilterItem(
-              text: regions[index].name,
-              iconPath: regions[index].iconPath,
-              index: index,
-              currentIdx: currentIdx,
-              handlePress: handlePress)),
+        scrollDirection: Axis.horizontal,
+        itemCount: places.length,
+        itemBuilder: (context, index) {
+          return buildCard(index);
+        },
+      ),
     );
+  }
+
+  Widget buildCard(int index) {
+    return PlacesItem(place: places[index]);
   }
 }

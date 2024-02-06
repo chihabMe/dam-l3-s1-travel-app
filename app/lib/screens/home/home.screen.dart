@@ -1,7 +1,9 @@
 import 'package:app/widgets/BottomNavigator.dart';
+import 'package:app/widgets/categoriesList/categories.filters.list.dart';
 import 'package:app/widgets/categoriesList/categories.list.dart';
 import 'package:app/widgets/placesList/places.list.dart';
 import 'package:app/widgets/regionsList/regions.list.dart';
+import 'package:app/widgets/search/search.dart';
 import 'package:app/widgets/ui/home.title.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
+              // ignore: prefer_const_constructors
               HomeTitle(
                 text: "Regions",
                 size: 24,
@@ -41,9 +44,13 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
               SizedBox(
-                height: 14,
+                height: 15,
               ),
-              CategoriesList(),
+              CategoriesFiltersList(),
+              SizedBox(
+                height: 15,
+              ),
+              CategoiresList()
             ],
           ),
         ),
