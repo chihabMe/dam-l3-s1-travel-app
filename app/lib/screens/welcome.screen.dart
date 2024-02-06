@@ -45,7 +45,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0, vertical: 10.0), // Adjust vertical padding
+                horizontal: 16.0,
+                vertical: 10.0,
+              ), // Adjust vertical padding
               child: ElevatedButton(
                 onPressed: () {
                   if (!onLastPage) {
