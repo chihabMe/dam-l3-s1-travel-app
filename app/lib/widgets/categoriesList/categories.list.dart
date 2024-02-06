@@ -4,18 +4,17 @@ import 'package:app/interfaces/i.filter.dart';
 import 'package:app/widgets/filter.item.dart';
 import 'package:flutter/material.dart';
 
-class RegionsList extends StatefulWidget {
+class CategoriesList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => RegionsListState();
 }
 
-class RegionsListState extends State<RegionsList> {
+class RegionsListState extends State<CategoriesList> {
   List<IFilter> regions = [
-    IFilter(name: "All", iconPath: "assets/icons/coast.png"),
-    IFilter(name: "Coast", iconPath: "assets/icons/coast.png"),
-    IFilter(name: "West", iconPath: "assets/icons/west.png"),
-    IFilter(name: "East", iconPath: "assets/icons/east.png"),
-    IFilter(name: "Desert", iconPath: "assets/icons/desert.png"),
+    IFilter(name: "cafe", iconPath: "assets/icons/cafe.png"),
+    IFilter(name: "restaurants", iconPath: "assets/icons/desert.png"),
+    IFilter(name: "museums", iconPath: "assets/icons/museum.png"),
+    IFilter(name: "historical sites", iconPath: "assets/icons/coliseum.png"),
   ];
   int currentIdx = 0;
   void handlePress(idx) {

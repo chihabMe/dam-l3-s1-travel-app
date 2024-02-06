@@ -19,13 +19,13 @@ class PlacesListState extends State<PlacesList> {
     ),
     IPlace(
       name: "Algiers",
-      image: "assets/constantine-algeria.jpg",
+      image: "assets/Algiers-Cathedral.jpg",
       rating: 4.2,
       state: "Algiers",
     ),
     IPlace(
       name: "Biskra",
-      image: "assets/constantine-algeria.jpg",
+      image: "assets/Oran-Palms.jpg",
       rating: 4,
       state: "Biskra",
     ),
@@ -34,8 +34,7 @@ class PlacesListState extends State<PlacesList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      height: 400,
+      height: 350,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: places.length,

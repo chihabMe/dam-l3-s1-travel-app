@@ -4,7 +4,12 @@ class HomeTitle extends StatelessWidget {
   late String text;
   late Color color;
   late double size;
-  HomeTitle({required this.text, this.color = Colors.blue, this.size = 15});
+  late FontWeight fontWeight;
+  HomeTitle(
+      {required this.text,
+      this.color = Colors.black,
+      this.size = 15,
+      this.fontWeight = FontWeight.w400});
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +17,6 @@ class HomeTitle extends StatelessWidget {
         style: TextStyle(
             color: this.color,
             fontSize: this.size,
-            fontWeight: FontWeight.w500));
+            fontWeight: this.fontWeight));
   }
 }

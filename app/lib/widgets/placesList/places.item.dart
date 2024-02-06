@@ -62,7 +62,7 @@ class PlacesItemState extends State<PlacesItem> {
                       begin: Alignment.bottomCenter,
                       end: Alignment.center,
                       colors: [
-                        Colors.black.withOpacity(0.6),
+                        Colors.blue.withOpacity(0.8),
                         Colors.transparent
                       ],
                     ),
