@@ -60,12 +60,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
+                  backgroundColor: Colors.blue,
                   padding: const EdgeInsets.symmetric(
                     vertical: 15,
                     horizontal: 8.0,
                   ),
                 ),
-                child: Text(onLastPage ? "Finish" : "Next"),
+                child: Text(
+                  onLastPage ? "Finish" : "Next",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),

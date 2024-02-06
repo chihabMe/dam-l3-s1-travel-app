@@ -26,7 +26,7 @@ class PlacesItemState extends State<PlacesItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
+      width: 260,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -72,7 +72,7 @@ class PlacesItemState extends State<PlacesItem> {
             ],
           ),
           Positioned(
-            bottom: 47,
+            bottom: 40,
             left: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -81,13 +81,13 @@ class PlacesItemState extends State<PlacesItem> {
                 Icon(
                   Icons.location_on_outlined,
                   color: Colors.white,
-                  size: 15,
+                  size: 14,
                 ),
                 SizedBox(width: 5),
                 HomeTitle(
                   text: this.place.state,
                   color: Colors.white,
-                  size: 14,
+                  size: 12,
                 )
               ],
             ),
@@ -97,7 +97,7 @@ class PlacesItemState extends State<PlacesItem> {
             left: 10,
             child: HomeTitle(
               text: this.place.name,
-              size: 25,
+              size: 22,
               color: Colors.white,
             ),
           ),
