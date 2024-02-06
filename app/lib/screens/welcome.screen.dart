@@ -38,7 +38,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SmoothPageIndicator(controller: _controller, count: 3),
+              SmoothPageIndicator(
+                controller: _controller,
+                count: 3, effect: const WormEffect(
+                activeDotColor: Colors.blue, // Set the active dot color
+                ),),
             ],
           ),
           SizedBox(
