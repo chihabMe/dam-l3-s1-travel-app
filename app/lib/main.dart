@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: WelcomeScreen(),
+      home: OnBoardingScreen(),
       initialRoute: "/",
       routes: {
         "/home": (ctx) => HomeScreen(),
