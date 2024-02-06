@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
-import 'package:app/widgets/regionsList/region.item.dart';
+import 'package:app/interfaces/i.filter.dart';
+import 'package:app/widgets/filter.item.dart';
 import 'package:flutter/material.dart';
 
 class RegionsList extends StatefulWidget {
@@ -9,7 +10,13 @@ class RegionsList extends StatefulWidget {
 }
 
 class RegionsListState extends State<RegionsList> {
-  List<String> regions = ["all", "coast", "west", "east", "desert"];
+  List<IFilter> regions = [
+    IFilter(name: "All", iconPath: "assets/icons/coast.png"),
+    IFilter(name: "Coast", iconPath: "assets/icons/coast.png"),
+    IFilter(name: "West", iconPath: "assets/icons/west.png"),
+    IFilter(name: "East", iconPath: "assets/icons/east.png"),
+    IFilter(name: "Desert", iconPath: "assets/icons/desert.png"),
+  ];
   int currentIdx = 0;
   void handlePress(idx) {
     setState(() {
@@ -19,45 +26,18 @@ class RegionsListState extends State<RegionsList> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-      scrollDirection: Axis.horizontal,
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            RegionItem(
-              name: regions[0],
+    return Container(
+      height: 70,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.all(10),
+          itemCount: regions.length,
+          itemBuilder: (context, index) => FilterItem(
+              text: regions[index].name,
+              iconPath: regions[index].iconPath,
+              index: index,
               currentIdx: currentIdx,
-              handlePress: handlePress,
-              index: 0,
-            ),
-            RegionItem(
-              name: regions[1],
-              currentIdx: currentIdx,
-              handlePress: handlePress,
-              index: 1,
-            ),
-            RegionItem(
-              name: regions[2],
-              currentIdx: currentIdx,
-              handlePress: handlePress,
-              index: 2,
-            ),
-            RegionItem(
-              name: regions[3],
-              currentIdx: currentIdx,
-              handlePress: handlePress,
-              index: 3,
-            ),
-          ]),
+              handlePress: handlePress)),
     );
-    // return ListView.builder(
-    //   scrollDirection: Axis.horizontal,
-    //   padding: EdgeInsets.all(10),
-    //   itemBuilder: (context, index) =>
-    //       Text("hi", style: TextStyle(color: Colors.black)),
-    //   itemCount: 3,
-    // );
   }
 }
