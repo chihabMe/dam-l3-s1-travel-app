@@ -12,41 +12,44 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
   elevation: 0,
   backgroundColor: Colors.blue.shade50,
-  title: Row(
-    children: [
-      // Your user logo or icon
-      Padding(
-        padding: EdgeInsets.only(right: 8.0),
-        child: Icon(
-          Icons.account_circle,
-          size: 28,
-          color: Colors.black,
+  title: Padding(
+    padding: const EdgeInsets.only(top: 8,left: 12),
+    child: Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Icon(
+            Icons.account_circle,
+            size: 40,
+            color: Colors.black,
+          ),
         ),
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Good Morning",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w300,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Good Morning",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16.0,
+                fontWeight: FontWeight.w300,
+              ),
             ),
-          ),
-          Text(
-            "Massi the Dog",
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+            Text(
+              "Massi the Dog",
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
-      ),
-    ],
+          ],
+        ),
+      ],
+    ),
   ),
 ),
 
@@ -82,7 +85,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: HomeBar(),
         floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
