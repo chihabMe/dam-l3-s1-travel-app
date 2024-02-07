@@ -72,94 +72,161 @@ class _SearchPlaceState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          title: Text(
-            "Explore",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 22.0,
-              fontWeight: FontWeight.bold,
-            ),
+      appBar: CustomAppBar(),
+      body: SearchBody(
+        focusNode: _focusNode,
+        isSearching: _isSearching,
+        updatePlacesList: updatePlacesList,
+        displayPlaces: displayPlaces,
+        buildCard: buildCard,
+      ),
+    );
+  }
+
+  Widget buildCard(int index) {
+    return PlacesItem(
+      place: displayPlaces[index],
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Size get preferredSize => Size.fromHeight(50.0);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0.0,
+      title: Text(
+        "Explore",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 22.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: false,
+    );
+  }
+}
+
+class SearchBody extends StatelessWidget {
+  final FocusNode focusNode;
+  final bool isSearching;
+  final Function(String) updatePlacesList;
+  final List<IPlace> displayPlaces;
+  final Widget Function(int) buildCard;
+
+  SearchBody({
+    required this.focusNode,
+    required this.isSearching,
+    required this.updatePlacesList,
+    required this.displayPlaces,
+    required this.buildCard,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SearchBar(
+            focusNode: focusNode,
+            isSearching: isSearching,
+            updatePlacesList: updatePlacesList,
           ),
-          centerTitle: false,
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              alignment: Alignment.centerRight,
-              children: [
-                TextField(
-                  onChanged: (value) => updatePlacesList(value),
-                  focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 8),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 248, 243, 243),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide(
-                        color: _isSearching ? Colors.blue : Colors.grey,
-                        width: 1.5,
+          SizedBox(height: 20.0),
+          Expanded(
+            child: displayPlaces.isEmpty
+                ? Center(
+                    child: Text(
+                      "No Results",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    hintText: "Search",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  )
+                : PlacesGrid(
+                    displayPlaces: displayPlaces,
+                    buildCard: buildCard,
                   ),
-                ),
-                if (_isSearching)
-                  Padding(
-                    padding: EdgeInsets.only(right: 8),
-                    child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _isSearching = false;
-                          _focusNode.unfocus();
-                        });
-                      },
-                      child: Text(
-                        "Cancel",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-            SizedBox(height: 20.0),
-            Expanded(
-              child: displayPlaces.length == 0
-                  ? Center(
-                      child: Text("No Results",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold)),
-                    )
-                  : GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.8, // Adjust as needed
-                        mainAxisSpacing: 10.0, // Add spacing between rows
-                        crossAxisSpacing: 10.0, // Add spacing between columns
-                      ),
-                      itemCount: displayPlaces.length,
-                      itemBuilder: (context, index) {
-                        final place = displayPlaces[index];
-                        return PlacesItem(place: place);
-                      },
-                    ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  final FocusNode focusNode;
+  final bool isSearching;
+  final Function(String) updatePlacesList;
+
+  SearchBar({
+    required this.focusNode,
+    required this.isSearching,
+    required this.updatePlacesList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.centerRight,
+      children: [
+        TextField(
+          onChanged: updatePlacesList,
+          focusNode: focusNode,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+            filled: true,
+            fillColor: Color.fromARGB(255, 248, 243, 243),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide.none,
+            ),
+            hintText: "Search ...",
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+            prefixIcon: Icon(Icons.search, color: Colors.grey),
+          ),
+        ),
+        if (isSearching)
+          Padding(
+            padding: EdgeInsets.only(right: 8),
+            child: CloseButton(),
+          ),
+      ],
+    );
+  }
+}
+
+class PlacesGrid extends StatelessWidget {
+  final List<IPlace> displayPlaces;
+  final Widget Function(int) buildCard;
+
+  PlacesGrid({
+    required this.displayPlaces,
+    required this.buildCard,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      primary: false,
+      crossAxisSpacing: 2,
+      mainAxisSpacing: 15,
+      crossAxisCount: 2,
+      childAspectRatio: MediaQuery.of(context).size.width /
+          (MediaQuery.of(context).size.height / 1.3),
+      scrollDirection: Axis.vertical,
+      children: List.generate(displayPlaces.length, (index) {
+        return buildCard(index);
+      }),
     );
   }
 }

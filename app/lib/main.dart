@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-import 'package:app/screens/search.screen.dart';
-=======
 import 'package:app/screens/home/favorite.screen.dart';
->>>>>>> origin/main
+import 'package:app/screens/search.screen.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +26,8 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/home": (ctx) => HomeScreen(),
-        "/search": (ctx) => SearchScreen()
+        "/search": (ctx) => SearchScreen(),
+        "/favorites": (ctx) => FavScreen()
       },
     );
   }

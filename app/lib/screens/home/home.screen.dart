@@ -11,44 +11,43 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  elevation: 0,
-  backgroundColor: Colors.blue.shade50,
-  title: Row(
-    children: [
-      // Your user logo or icon
-      Padding(
-        padding: EdgeInsets.only(right: 8.0),
-        child: Icon(
-          Icons.account_circle,
-          size: 28,
-          color: Colors.black,
+        elevation: 0,
+        backgroundColor: Colors.blue.shade50,
+        title: Row(
+          children: [
+            // Your user logo or icon
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.account_circle,
+                size: 28,
+                color: Colors.black,
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Good Morning",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                Text(
+                  "Massi the Dog",
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Good Morning",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          Text(
-            "Massi the Dog",
-            style: TextStyle(
-              color: Colors.black87,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    ],
-  ),
-),
-
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -81,13 +80,8 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-<<<<<<< HEAD
-      bottomNavigationBar: BottomNavigator(),
-      floatingActionButton: FloatingActionButton(
-=======
       bottomNavigationBar: HomeBar(),
-        floatingActionButton: FloatingActionButton(
->>>>>>> origin/main
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, "/search");
         },
