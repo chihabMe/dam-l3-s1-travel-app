@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomeBar extends StatefulWidget {
+class BottomNavigator extends StatefulWidget {
   @override
-  HomeBarState createState() => HomeBarState();
+  BottomNavigatorState createState() => BottomNavigatorState();
 }
 
-class HomeBarState extends State<HomeBar> {
+class BottomNavigatorState extends State<BottomNavigator> {
   late int _selectedIndex = 0;
 
   void handleTap(int idx) {
@@ -20,11 +20,12 @@ class HomeBarState extends State<HomeBar> {
       iconSize: 28,
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.blue,
+      
       elevation: 30,
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite), label: "faveroties"),
+icon: Icon(Icons.favorite), label: "faveroties"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile"),
       ],
       onTap: handleTap,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:app/widgets/BottomNavigator.dart';
 import 'package:app/widgets/categoriesList/categories.filters.list.dart';
 import 'package:app/widgets/categoriesList/categories.list.dart';
 import 'package:app/widgets/placesList/places.list.dart';
@@ -11,43 +10,47 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.blue.shade50,
-        title: Row(
+        
+  elevation: 0,
+  backgroundColor: Colors.blue.shade50,
+  title: Padding(
+    padding: const EdgeInsets.only(top: 8,left: 12),
+    child: Row(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: 8.0),
+          child: Icon(
+            Icons.account_circle,
+            size: 40,
+            color: Colors.black,
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Your user logo or icon
-            Padding(
-              padding: EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.account_circle,
-                size: 28,
+            Text(
+              "Good Morning",
+              style: TextStyle(
                 color: Colors.black,
+                fontSize: 16.0,
+                fontWeight: FontWeight.w300,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Good Morning",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                Text(
-                  "Massi the Dog",
-                  style: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            Text(
+              "Massi the Dog",
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
-      ),
+      ],
+    ),
+  ),
+),
+
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -80,8 +83,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: HomeBar(),
-      floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, "/search");
         },
