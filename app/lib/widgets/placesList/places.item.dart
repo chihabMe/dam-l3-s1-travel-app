@@ -5,16 +5,22 @@ import 'package:flutter/material.dart';
 
 class PlacesItem extends StatefulWidget {
   final IPlace place;
-  PlacesItem({required this.place});
+  late double width;
+  late double height;
+  PlacesItem({required this.place, this.width = 280, this.height = 350});
   bool _liked = false;
 
   @override
-  State<StatefulWidget> createState() => PlacesItemState(place: this.place);
+  State<StatefulWidget> createState() => PlacesItemState(
+      place: this.place, height: this.height, width: this.width);
 }
 
 class PlacesItemState extends State<PlacesItem> {
+  late double width;
+  late double height;
   final IPlace place;
-  PlacesItemState({required this.place});
+  PlacesItemState(
+      {required this.place, required this.width, required this.height});
   bool _liked = false;
 
   void handleLike() {
@@ -26,7 +32,8 @@ class PlacesItemState extends State<PlacesItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260,
+      width: this.width,
+      height: this.height,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
