@@ -39,7 +39,11 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.1.0
   smooth_page_indicator: ^1.1.0
+<<<<<<< HEAD
   google_nav_bar: ^5.0.6
+=======
+  carousel_slider: ^4.2.1
+>>>>>>> origin/main
 
 dev_dependencies:
   flutter_test:

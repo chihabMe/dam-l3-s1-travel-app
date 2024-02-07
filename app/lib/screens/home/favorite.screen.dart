@@ -1,4 +1,5 @@
 import 'package:app/widgets/favoritePlacesList/fav.places.list.dart';
+
 import 'package:app/widgets/ui/home.title.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class FavScreen extends StatelessWidget {
         ),
       ),
       
+
     );
   }
 }

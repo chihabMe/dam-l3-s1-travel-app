@@ -43,7 +43,7 @@ class FavoritePlacesListState extends State<FavoritePlacesList> {
                 mainAxisSpacing: 15,
                 crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height / 1.5),
+                    (MediaQuery.of(context).size.height / 1.3),
                 scrollDirection: Axis.vertical,
                 children: List.generate(favorites.length, (index) {
                   return buildCard(index);

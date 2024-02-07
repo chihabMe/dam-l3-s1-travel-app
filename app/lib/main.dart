@@ -1,6 +1,6 @@
-import 'package:app/screens/home/home_main.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:app/screens/'
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
       ),
       home: OnBoardingScreen(),
       initialRoute: "/",
-      routes: {"/home": (ctx) => HomePageView()},
+      routes: {"/home": (ctx) => 
+      },
     );
   }
 }
