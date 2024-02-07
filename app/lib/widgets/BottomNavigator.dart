@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BottomNavigator extends StatefulWidget {
+class HomeBar extends StatefulWidget {
   @override
-  BottomNavigatorState createState() => BottomNavigatorState();
+  HomeBarState createState() => HomeBarState();
 }
 
-class BottomNavigatorState extends State<BottomNavigator> {
+class HomeBarState extends State<HomeBar> {
   late int _selectedIndex = 0;
 
   void handleTap(int idx) {
