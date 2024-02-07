@@ -1,3 +1,4 @@
+import 'package:app/screens/home/favorite.screen.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: OnBoardingScreen(),
+      home: FavScreen(),
       initialRoute: "/",
       routes: {"/home": (ctx) => HomeScreen()},
     );
