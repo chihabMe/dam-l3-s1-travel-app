@@ -12,13 +12,14 @@ class FavScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             HomeTitle(text: "Favorite", size: 24, fontWeight: FontWeight.w600),
-            SizedBox(height: 40),
-            Container(height: 1000, child: FavoritePlacesList()),
+            SizedBox(height: 7),
+            FavoritePlacesList(),
           ]),
         ),
       ),
