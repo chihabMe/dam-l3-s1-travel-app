@@ -1,4 +1,5 @@
 import 'package:app/screens/home/favorite.screen.dart';
+import 'package:app/screens/home/profile.screen.dart';
 import 'package:app/screens/search.screen.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: OnBoardingScreen(),
+      home: ProfileScreen(),
       initialRoute: "/",
       routes: {
         "/home": (ctx) => HomeScreen(),
