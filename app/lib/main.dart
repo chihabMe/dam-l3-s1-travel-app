@@ -1,4 +1,5 @@
 import 'package:app/screens/home/home.main.dart';
+import 'package:app/screens/search.screen.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       home: OnBoardingScreen(),
       initialRoute: "/",
-      routes: {"/home": (ctx) =>HomePageView()
+      routes: {
+        "/home": (ctx) => HomePageView(),
+        "/search": (ctx) => SearchScreen(),
       },
     );
   }
