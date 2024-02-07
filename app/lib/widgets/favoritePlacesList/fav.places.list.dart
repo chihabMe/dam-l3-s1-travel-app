@@ -35,7 +35,7 @@ class FavoritePlacesListState extends State<FavoritePlacesList> {
   Widget build(BuildContext context) {
     return Container(
       height: 750,
-      child: !favorites.isNotEmpty
+      child: favorites.isNotEmpty
           ? Expanded(
               child: GridView.count(
                 primary: false,
