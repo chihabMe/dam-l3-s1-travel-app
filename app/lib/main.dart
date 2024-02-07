@@ -1,3 +1,4 @@
+import 'package:app/screens/search.screen.dart';
 import 'package:app/screens/welcome_screens/welcome.screen.dart';
 import 'package:app/screens/home/home.screen.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
       ),
       home: OnBoardingScreen(),
       initialRoute: "/",
-      routes: {"/home": (ctx) => HomeScreen()},
+      routes: {
+        "/home": (ctx) => HomeScreen(),
+        "/search": (ctx) => SearchScreen()
+      },
     );
   }
 }
