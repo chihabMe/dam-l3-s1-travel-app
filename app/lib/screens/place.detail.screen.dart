@@ -1,4 +1,5 @@
 import 'package:app/interfaces/i.place.dart';
+import 'package:app/widgets/detailpage/add.comment.dart';
 import 'package:flutter/material.dart';
 
 class PlaceDetailScreen extends StatefulWidget {
@@ -135,6 +136,10 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                       fontSize: 16,
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  AddComment(),
                 ],
               ),
             ),
