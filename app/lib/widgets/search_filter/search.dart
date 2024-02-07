@@ -101,9 +101,9 @@ class _SearchPlaceState extends State<SearchPlace> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(vertical: 8),
                     filled: true,
-                    fillColor: Colors.white,
+                    fillColor: Color.fromARGB(255, 248, 243, 243),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderRadius: BorderRadius.circular(30.0),
                       borderSide: BorderSide(
                         color: _isSearching ? Colors.blue : Colors.grey,
                         width: 1.5,
@@ -134,100 +134,112 @@ class _SearchPlaceState extends State<SearchPlace> {
             ),
             SizedBox(height: 20.0),
             Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.8, // Adjust as needed
-                  mainAxisSpacing: 10.0, // Add spacing between rows
-                  crossAxisSpacing: 10.0, // Add spacing between columns
-                ),
-                itemCount: displayPlaces.length,
-                itemBuilder: (context, index) {
-                  final place = displayPlaces[index];
-                  return Container(
-                    width: 260,
-                    margin: EdgeInsets.symmetric(horizontal: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage(place.image),
-                        fit: BoxFit.cover,
+              child: displayPlaces.length == 0
+                  ? Center(
+                      child: Text("No Results",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold)),
+                    )
+                  : GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.8, // Adjust as needed
+                        mainAxisSpacing: 10.0, // Add spacing between rows
+                        crossAxisSpacing: 10.0, // Add spacing between columns
                       ),
-                    ),
-                    child: Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: LikeButton(
-                                    active: false, // Set to false initially
-                                    handleClick: () {}, // Dummy function
-                                  ),
-                                ),
-                              ],
+                      itemCount: displayPlaces.length,
+                      itemBuilder: (context, index) {
+                        final place = displayPlaces[index];
+                        return Container(
+                          width: 260,
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: AssetImage(place.image),
+                              fit: BoxFit.cover,
                             ),
-                            Expanded(child: SizedBox()),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                height: 50, // Adjust the height based on your needs
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.center,
-                                    colors: [
-                                      Colors.blue.withOpacity(0.8),
-                                      Colors.transparent
+                          ),
+                          child: Stack(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: LikeButton(
+                                          active:
+                                              false, // Set to false initially
+                                          handleClick: () {}, // Dummy function
+                                        ),
+                                      ),
                                     ],
                                   ),
+                                  Expanded(child: SizedBox()),
+                                  // Positioned widget should be moved here
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      height:
+                                          50, // Adjust the height based on your needs
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.center,
+                                          colors: [
+                                            Colors.blue.withOpacity(0.8),
+                                            Colors.transparent
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              // Other Positioned widgets remain unchanged
+                              Positioned(
+                                bottom: 40,
+                                left: 10,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      color: Colors.white,
+                                      size: 14,
+                                    ),
+                                    SizedBox(width: 5),
+                                    HomeTitle(
+                                      text: place.state,
+                                      color: Colors.white,
+                                      size: 12,
+                                    )
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          bottom: 40,
-                          left: 10,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                color: Colors.white,
-                                size: 14,
+                              Positioned(
+                                bottom: 10,
+                                left: 10,
+                                child: HomeTitle(
+                                  text: place.name,
+                                  size: 22,
+                                  color: Colors.white,
+                                ),
                               ),
-                              SizedBox(width: 5),
-                              HomeTitle(
-                                text: place.state,
-                                color: Colors.white,
-                                size: 12,
-                              )
                             ],
                           ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          left: 10,
-                          child: HomeTitle(
-                            text: place.name,
-                            size: 22,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             ),
           ],
         ),
