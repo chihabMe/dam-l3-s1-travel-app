@@ -1,8 +1,13 @@
 import 'dart:io';
-
+import 'package:admin_app/widgets/add_place/additional_photos_picker.dart';
+import 'package:admin_app/widgets/add_place/category_dropdown.dart';
+import 'package:admin_app/widgets/add_place/description_text_field.dart';
+import 'package:admin_app/widgets/add_place/main_photo_picker.dart';
+import 'package:admin_app/widgets/add_place/region_input.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 
 class AddPlaceScreen extends StatefulWidget {
   @override
@@ -11,19 +16,18 @@ class AddPlaceScreen extends StatefulWidget {
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   late String _selectedCategory;
-  late String _selectedRegion;
+  late String _regionInput;
   late String _name;
   late String _description;
   late XFile? _mainPhotoFile;
-
+  List<XFile> _additionalPhotos = [];
   List<String> _categories = ['Restaurant', 'Museum', 'Cafe'];
-  List<String> _regions = ['Constantine', 'Algiers', 'Biskra'];
 
   @override
   void initState() {
     super.initState();
     _selectedCategory = _categories.first;
-    _selectedRegion = _regions.first;
+    _regionInput = '';
     _name = '';
     _description = '';
     _mainPhotoFile = null;
@@ -41,75 +45,73 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildMainPhotoWidget(),
+              SizedBox(height: 20.0),
+              CategoryDropdown(
+                selectedCategory: _selectedCategory,
+                categories: _categories,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategory = value.toString();
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              RegionInput(
+                labelText: 'Region',
+                onChanged: (value) {
+                  setState(() {
+                    _regionInput = value!;
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    _name = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 20),
+              DescriptionTextField(
+                onChanged: (value) {
+                  setState(() {
+                    _description = value!;
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              MainPhotoPicker(
+                onPhotoPicked: (photo) {
+                  setState(() {
+                    _mainPhotoFile = photo;
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              AdditionalPhotosPicker(
+                onPhotoPicked: (photo) {
+                  if (photo != null) {
+                    setState(() {
+                      _additionalPhotos.add(photo);
+                    });
+                  }
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // Add item logic here
+                },
+                child: Text('Add Item'),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildMainPhotoWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Main Photo:',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: _pickMainImage,
-          child: Text('Add Main Photo'),
-        ),
-        SizedBox(height: 10),
-        _mainPhotoFile != null
-            ? Image.file(File(_mainPhotoFile!.path))
-            : Container(),
-      ],
-    );
-  }
-
-  Future<void> _pickMainImage() async {
-  final PermissionStatus permissionStatus = await Permission.photos.request(); // Request permission for accessing photos
-  if (permissionStatus.isGranted) {
-    final pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      setState(() {
-        _mainPhotoFile = XFile(pickedFile.path);
-      });
-    }
-  } else if (permissionStatus.isDenied) {
-    // Handle case when permission is denied
-    _showPermissionDeniedDialog();
-  }
-}
-
-
-  Future<void> _showPermissionDeniedDialog() async {
-    await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Permission Denied'),
-        content: Text('You denied permission to access storage. Would you like to grant permission now?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              // Open app settings to allow the user to grant permission manually
-              openAppSettings();
-            },
-            child: Text('Open Settings'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('Cancel'),
-          ),
-        ],
       ),
     );
   }
