@@ -1,3 +1,4 @@
+import 'package:admin_app/widgets/analytics/place.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,7 +30,18 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       body: GridView.count(
         crossAxisCount: 2,
         children: _tabsData.map((tabData) {
-          return TabCard(name: tabData.name, count: tabData.count);
+          return InkWell(
+            onTap: () {
+              if (tabData.name == 'Places') {
+                // Navigate to the PlaceListScreen when the "Places" tab is clicked
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PlaceListScreen()),
+                );
+              }
+            },
+            child: TabCard(name: tabData.name, count: tabData.count),
+          );
         }).toList(),
       ),
     );

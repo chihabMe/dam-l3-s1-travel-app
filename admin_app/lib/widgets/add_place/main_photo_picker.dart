@@ -5,9 +5,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart'; // Import the image_cropper package
 
 class MainPhotoPicker extends StatefulWidget {
+  final XFile? initialValue;
   final void Function(XFile?)? onPhotoPicked; // Changed to accept nullable XFile
 
-  const MainPhotoPicker({Key? key, this.onPhotoPicked}) : super(key: key);
+  const MainPhotoPicker({Key? key, this.onPhotoPicked, this.initialValue}) : super(key: key);
 
   @override
   _MainPhotoPickerState createState() => _MainPhotoPickerState();
@@ -15,6 +16,14 @@ class MainPhotoPicker extends StatefulWidget {
 
 class _MainPhotoPickerState extends State<MainPhotoPicker> {
   XFile? _mainPhotoFile;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      _mainPhotoFile = widget.initialValue;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +58,8 @@ class _MainPhotoPickerState extends State<MainPhotoPicker> {
           _mainPhotoFile = XFile(croppedFile.path);
         });
         if (widget.onPhotoPicked != null) {
-          widget.onPhotoPicked!(_mainPhotoFile); // Call the onPhotoPicked callback with the cropped file
+          widget.onPhotoPicked!(
+              _mainPhotoFile); // Call the onPhotoPicked callback with the cropped file
         }
       }
     }

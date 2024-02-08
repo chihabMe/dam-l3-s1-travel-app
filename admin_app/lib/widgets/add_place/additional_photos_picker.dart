@@ -4,9 +4,10 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AdditionalPhotosPicker extends StatefulWidget {
+  final List<XFile?>? initialValue;
   final void Function(XFile)? onPhotoPicked;
 
-  const AdditionalPhotosPicker({Key? key, this.onPhotoPicked}) : super(key: key);
+  const AdditionalPhotosPicker({Key? key, this.onPhotoPicked, this.initialValue}) : super(key: key);
 
   @override
   _AdditionalPhotosPickerState createState() => _AdditionalPhotosPickerState();
@@ -14,6 +15,14 @@ class AdditionalPhotosPicker extends StatefulWidget {
 
 class _AdditionalPhotosPickerState extends State<AdditionalPhotosPicker> {
   List<XFile> _additionalPhotos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialValue != null) {
+      _additionalPhotos = List.from(widget.initialValue!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
