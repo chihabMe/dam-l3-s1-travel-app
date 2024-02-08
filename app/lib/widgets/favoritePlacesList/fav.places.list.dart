@@ -59,7 +59,7 @@ class FavoritePlacesListState extends State<FavoritePlacesList> {
                   children: [
                     Icon(
                       Icons.heart_broken,
-                      color: Colors.blue,
+                      color: Colors.grey,
                       size: 80,
                     ),
                     SizedBox(

@@ -2,7 +2,6 @@ import 'package:app/interfaces/i.place.dart';
 import 'package:app/widgets/detailpage/add.comment.dart';
 import 'package:app/widgets/detailpage/list.comments.dart';
 import 'package:flutter/material.dart';
-
 class PlaceDetailScreen extends StatefulWidget {
   final IPlace place;
 
@@ -12,8 +11,10 @@ class PlaceDetailScreen extends StatefulWidget {
   _PlaceDetailScreenState createState() => _PlaceDetailScreenState();
 }
 
+
 class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
   String _selectedImage = '';
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -26,12 +27,20 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Scroll to the top of the page
+            _scrollController.animateTo(0, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+          },
+          child: Icon(Icons.arrow_upward),
+        ),
         body: SingleChildScrollView(
+          controller: _scrollController,
           scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Stack(
+                Stack(
                 children: [
                   Container(
                     height: 300,
@@ -148,6 +157,12 @@ class _PlaceDetailScreenState extends State<PlaceDetailScreen> {
                     SizedBox(
                       height: 30,
                     ),
+                    Text(
+                      'Comments & Reviews:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),),
                     Container(
                       height: 500,
                       child: CommentsList(),

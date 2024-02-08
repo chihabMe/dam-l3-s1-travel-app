@@ -11,9 +11,20 @@ class CommentsListState extends State<CommentsList> {
   @override
   Widget build(BuildContext context) {
     final List<IComment> comments = [
-      IComment(username: "see4th", comment: "hhhhhhh biskra"),
-      IComment(username: "chihab", comment: "aaaaaaaa"),
-      IComment(username: "massi", comment: "ya kafir")
+      IComment(username: "see4th", comment: "hhhhhhh biskra", rating: 3.1),
+      IComment(username: "chihab", comment: "aaaaaaaa", rating: 3.1),
+      IComment(username: "massi", comment: "ya kafir", rating: 3.1),
+      IComment(username: "Zinos", comment: "Akhdmooo Yaw", rating: 4.8),
+      IComment(username: "see4th", comment: "hhhhhhh biskra", rating: 3.1),
+      IComment(username: "chihab", comment: "aaaaaaaa", rating: 3.1),
+      IComment(username: "massi", comment: "ya kafir", rating: 3.1),
+      IComment(username: "see4th", comment: "hhhhhhh biskra", rating: 3.1),
+      IComment(username: "chihab", comment: "aaaaaaaa", rating: 3.1),
+      IComment(username: "massi", comment: "ya kafir", rating: 3.1),
+      IComment(username: "see4th", comment: "hhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskrahhhhhhh biskra", rating: 3.1),
+      IComment(username: "chihab", comment: "aaaaaaaa", rating: 3.1),
+      IComment(username: "massi", comment: "ya kafir", rating: 3.1),
+
     ];
     return Container(
       height: 350,

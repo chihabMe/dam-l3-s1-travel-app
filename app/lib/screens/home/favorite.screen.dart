@@ -7,21 +7,30 @@ class FavScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          "Favourite",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 22.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: false,
+      ),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            HomeTitle(text: "Favorite", size: 24, fontWeight: FontWeight.w600),
-            SizedBox(height: 7),
             FavoritePlacesList(),
           ]),
         ),
       ),
-      
-
     );
   }
 }

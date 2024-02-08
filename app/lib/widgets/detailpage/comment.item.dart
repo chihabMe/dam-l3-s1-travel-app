@@ -1,78 +1,82 @@
-import 'package:app/interfaces/i.comment.dart';
-import 'package:app/interfaces/i.place.dart';
-import 'package:app/screens/place.detail.screen.dart';
-import 'package:app/widgets/ui/home.title.dart';
-import 'package:app/widgets/ui/like.button.dart';
 import 'package:flutter/material.dart';
+import 'package:app/interfaces/i.comment.dart';
 
-class CommentItem extends StatefulWidget {
+class CommentItem extends StatelessWidget {
   final IComment comment;
-  late double width;
-  late double height;
-  CommentItem({required this.comment, this.width = 280, this.height = 100});
+  final double width;
+  final double height;
 
-  @override
-  State<StatefulWidget> createState() => CommentItemState(
-      comment: this.comment, height: this.height, width: this.width);
-}
-
-class CommentItemState extends State<CommentItem> {
-  late double width;
-  late double height;
-  final IComment comment;
-  CommentItemState(
-      {required this.comment, required this.width, required this.height});
+  const CommentItem({
+    Key? key,
+    required this.comment,
+    this.width = 280,
+    this.height = 100,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    late IComment comment;
-    return GestureDetector(
-      child: Container(
-        width: this.width,
-        height: this.height,
-        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Stack(
+    return Container(
+      width: width,
+      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: Colors.black),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(child: SizedBox()),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(191, 110, 177, 235),
-                      border:
-                          Border.all(color: Color.fromARGB(135, 33, 149, 243)),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
+                Icon(
+                  Icons.account_circle,
+                  size: 50,
+                  color: Colors.black,
                 ),
               ],
             ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20, top: 10),
-                  child: Text(
-                    this.comment.username,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            SizedBox(width: 8), // Add some spacing between the profile icon and the text
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    comment.username, // Username text
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Positioned(
-                  right: 200,
-                  bottom: 10,
-                  child: Text(
-                    this.comment.comment,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 16,
+                        color: Colors.amber,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '${comment.rating}', // Rating text
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  SizedBox(height: 8),
+                  Text(
+                    comment.comment, // Comment text
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
