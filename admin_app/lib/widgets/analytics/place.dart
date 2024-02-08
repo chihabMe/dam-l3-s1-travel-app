@@ -1,24 +1,6 @@
 import 'package:admin_app/widgets/analytics/edit_place.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-
-class Place {
-  final String name;
-  final String region;
-  final String category;
-  final String description;
-  final XFile? mainPhoto;
-  final List<XFile?> additionalPhotos;
-
-  Place({
-    required this.name,
-    required this.region,
-    required this.category,
-    required this.description,
-    required this.mainPhoto,
-    required this.additionalPhotos,
-  });
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PlaceListScreen extends StatefulWidget {
   @override
@@ -26,30 +8,14 @@ class PlaceListScreen extends StatefulWidget {
 }
 
 class _PlaceListScreenState extends State<PlaceListScreen> {
-  List<Place> _places = [
-    Place(
-      name: 'Place 1',
-      region: 'Region 1',
-      category: 'Category 1',
-      description: 'Description for Place 1',
-      mainPhoto: null,
-      additionalPhotos: [],
-    ),
-    Place(
-      name: 'Place 2',
-      region: 'Region 2',
-      category: 'Category 2',
-      description: 'Description for Place 2',
-      mainPhoto: null,
-      additionalPhotos: [],
-    ),
-    // Add more places as needed
-  ];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  void _updatePlace(Place editedPlace, int index) {
-    setState(() {
-      _places[index] = editedPlace;
-    });
+  Future<void> _deletePlace(String documentId) async {
+    try {
+      await _firestore.collection('places').doc(documentId).delete();
+    } catch (e) {
+      print('Error deleting place: $e');
+    }
   }
 
   @override
@@ -58,47 +24,81 @@ class _PlaceListScreenState extends State<PlaceListScreen> {
       appBar: AppBar(
         title: Text('Places List'),
       ),
-      body: ListView.builder(
-        itemCount: _places.length,
-        itemBuilder: (context, index) {
-          Place place = _places[index];
-          return ListTile(
-            leading: CircleAvatar(
-            ),
-            title: Text(place.name),
-            subtitle: Text(place.region),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditPlaceScreen(
-                          place: place,
-                          onUpdatePlace: (editedPlace) {
-                            _updatePlace(editedPlace, index);
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('places').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          final List<DocumentSnapshot> documents = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final placeData = documents[index].data() as Map<String, dynamic>;
+              final String documentId = documents[index].id;
+              final String name = placeData['name'] ?? '';
+              final String region = placeData['region'] ?? '';
+              final String category = placeData['category'] ?? '';
+              final String description = placeData['description'] ?? '';
+
+              return ListTile(
+                leading: Icon(Icons.photo),
+                title: Text(name),
+                subtitle: Text(region),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        // Navigate to the EditPlaceScreen with the selected place
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditPlaceScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Delete Place'),
+                              content: Text('Are you sure you want to delete this place?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    _deletePlace(documentId);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Delete'),
+                                ),
+                              ],
+                            );
                           },
-                        ),
-                      ),
-                    );
-                  },
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    setState(() {
-                      _places.removeAt(index);
-                    });
-                  },
-                ),
-              ],
-            ),
-            onTap: () {
-              // Handle tapping on the place
-              // Navigate to place detail screen or perform other action
+                onTap: () {
+                  // Handle tapping on the place
+                },
+              );
             },
           );
         },

@@ -7,9 +7,6 @@ import 'package:image_picker/image_picker.dart';
 // Add imports for necessary packages and widgets
 
 class EditPlaceScreen extends StatefulWidget {
-  final Place place; // Add place parameter
-
-  EditPlaceScreen({required this.place, required Null Function(dynamic editedPlace) onUpdatePlace});
 
   @override
   _EditPlaceScreenState createState() => _EditPlaceScreenState();

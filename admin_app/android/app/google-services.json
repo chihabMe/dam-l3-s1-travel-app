@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1043863922307",
+    "project_id": "travly-530e5",
+    "storage_bucket": "travly-530e5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043863922307:android:1282c5ceb29fc645529db6",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV1STZ5lIgY3SFbBTVASWqawvkuqcVBnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

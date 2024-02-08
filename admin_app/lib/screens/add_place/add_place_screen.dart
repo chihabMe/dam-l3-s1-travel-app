@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'package:admin_app/widgets/add_place/additional_photos_picker.dart';
 import 'package:admin_app/widgets/add_place/category_dropdown.dart';
 import 'package:admin_app/widgets/add_place/description_text_field.dart';
 import 'package:admin_app/widgets/add_place/main_photo_picker.dart';
 import 'package:admin_app/widgets/add_place/region_input.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 
 class AddPlaceScreen extends StatefulWidget {
   @override
@@ -105,7 +103,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Add item logic here
+                  _addItem();
                 },
                 child: Text('Add Item'),
               ),
@@ -114,5 +112,22 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _addItem() async {
+    try {
+      await FirebaseFirestore.instance.collection('places').add({
+        'category': _selectedCategory,
+        'description': _description,
+        'name': _name,
+        'rating': 4.3,
+        'state': _regionInput, // Use region instead of state
+      });
+      // Successfully added restaurant data
+      print('Restaurant data added to Firestore');
+    } catch (e) {
+      // Error occurred while adding data
+      print('Error adding restaurant data: $e');
+    }
   }
 }
