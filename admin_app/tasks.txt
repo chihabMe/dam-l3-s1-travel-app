@@ -1,0 +1,47 @@
+#Login Screen:
+    
+    #Username field
+    #Password field
+    #Login button
+
+#Main Screen (After Login):
+
+    #Bottom navigation bar with tabs for Analytics, Plus (shortcut to add something), and Profile
+
+Analytics Screen:
+
+    Sub-navigation bar with tabs for Regions, Places, Categories, Reviews, and Comments
+    Each tab displays a list of items (e.g., regions, places) with options to delete or edit each item
+
+Profile Screen:
+
+    Display details of the logged-in admin (e.g., username, email, role)
+    Option to edit profile details
+
+Example UI Components:
+
+    Login Screen:
+        Username TextFormField
+        Password TextFormField
+        Login Button
+
+    Main Screen:
+        BottomNavigationBar
+            Tab for Analytics
+            Tab for Plus
+            Tab for Profile
+
+    Analytics Screen:
+        Sub-navigation (TabBar)
+            Tab for Regions
+            Tab for Places
+            Tab for Categories
+            Tab for Reviews
+            Tab for Comments
+        ListView or GridView to display items (e.g., regions, places)
+        ListTile for each item with delete and edit options
+        Plus FloatingActionButton to add a new item
+
+    Profile Screen:
+        Profile details displayed in a ListTile or similar format
+        Edit button to edit profile details
