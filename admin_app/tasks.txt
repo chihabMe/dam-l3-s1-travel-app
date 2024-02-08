@@ -45,3 +45,13 @@ Example UI Components:
     Profile Screen:
         Profile details displayed in a ListTile or similar format
         Edit button to edit profile details
+
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    Details Screen:
+        Comment + Reviews
+        Best UI
+    Profile Page:
+        Good UI
